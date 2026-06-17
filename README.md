@@ -151,7 +151,8 @@ This means the technique I simulated is used by **nation-state level threat acto
 | Detection Time | < 1 second after first attempt |
 | Total Alerts | 400+ in under 30 seconds |
 
-Full incident report: [`incidents/INC-2026-001_SSH_BruteForce/incident_report.docx`](incidents/INC-2026-001_SSH_BruteForce/incident_report.docx)
+Full incident report: [SOC_Incident_Report_INC-2026-001.docx](https://github.com/user-attachments/files/29044904/SOC_Incident_Report_INC-2026-001.docx)
+
 
 ---
 
