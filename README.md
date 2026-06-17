@@ -91,7 +91,8 @@ Hydra attempted thousands of SSH login combinations per minute. Every single fai
 
 ### Dashboard Overview — 419 Total Security Events
 
-![Wazuh Dashboard Overview](screenshots/dashboard_overview.png)
+<img width="1916" height="955" alt="dashboard_overview" src="https://github.com/user-attachments/assets/719400a0-31f8-451e-9b57-0d5e2c9c7e05" />
+
 
 The Wazuh dashboard shows the complete security event timeline. Notice the **spike in alerts at 11:49** when the Wazuh agent first connected and started sending Windows security logs, and the **flood of authentication failures at 12:06** when the brute force attack began.
 
@@ -99,7 +100,8 @@ The Wazuh dashboard shows the complete security event timeline. Notice the **spi
 
 ### Brute Force Alerts — Real Time Detection
 
-![SSH Brute Force Alerts](screenshots/brute_force_alerts.png)
+<img width="1913" height="887" alt="brute_force_alerts" src="https://github.com/user-attachments/assets/eceaa72d-2463-4055-83ee-89d3e4926fb7" />
+
 
 Wazuh detected every single password attempt in real time:
 
@@ -113,7 +115,8 @@ Wazuh detected every single password attempt in real time:
 
 ### MITRE ATT&CK Mapping — T1078 Valid Accounts
 
-![MITRE ATT&CK T1078](screenshots/mitre_attack_t1078.png)
+<img width="1409" height="909" alt="mitre_attack_t1078" src="https://github.com/user-attachments/assets/cbc09777-4a21-4cb6-9933-5c5e91542062" />
+
 
 Wazuh automatically mapped the brute force attack to **two MITRE ATT&CK techniques**:
 
