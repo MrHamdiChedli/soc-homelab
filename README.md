@@ -1,201 +1,262 @@
-# 🛡️ SOC Analyst Homelab — SSH Brute Force Detection with Wazuh SIEM
+# 🛡️ SOC Analyst Homelab Portfolio
 
-> **Built by:** Hamdi  
-> **Date:** June 2026  
-> **Goal:** Simulate real-world attacks and detect them using a home SIEM — just like a Tier 1 SOC Analyst
+![Wazuh](https://img.shields.io/badge/Wazuh-SIEM-blue)
+![Windows](https://img.shields.io/badge/Windows-11-blue)
+![Ubuntu](https://img.shields.io/badge/Ubuntu-26.04-orange)
+![Kali](https://img.shields.io/badge/Kali-Linux-purple)
+![MITRE](https://img.shields.io/badge/MITRE-ATT%26CK-red)
+![Nmap](https://img.shields.io/badge/Nmap-Reconnaissance-success)
+![Hydra](https://img.shields.io/badge/Hydra-Brute%20Force-lightgrey)
+
+> **Author:** Hamdi  
+> **Role:** Cybersecurity Student | Aspiring SOC Analyst  
+> **Status:** 🚧 Active Project  
+> **Focus:** Blue Team | Detection Engineering | Incident Response | Threat Hunting
 
 ---
 
-## 📌 Project Overview
+# 📌 About This Project
 
-This project documents the setup of a fully functional **Security Operations Center (SOC) homelab** built from scratch using free and open-source tools. The lab simulates a real enterprise environment where a SIEM monitors endpoints and detects attacks in real time.
+This repository documents my journey of building a **Security Operations Center (SOC) Homelab** from scratch.
 
-**This is not a tutorial I followed — I built and troubleshot every part of this myself.**
+The goal is to gain practical, hands-on experience with the technologies, tools, and workflows used by SOC analysts in enterprise environments.
+
+Rather than only studying cybersecurity theory, I wanted to understand how attacks happen, how defenders detect them, and how incidents are investigated and documented.
+
+Every project in this repository is performed inside a **controlled virtual lab** built specifically for learning and defensive security research.
 
 ---
 
-## 🖥️ Lab Architecture
+# 🎯 Objectives
 
+This homelab is designed to help me develop practical skills in:
+
+- Security Information and Event Management (SIEM)
+- Windows Event Log Analysis
+- Linux Administration
+- Threat Detection
+- Incident Response
+- Digital Forensics
+- Detection Engineering
+- MITRE ATT&CK Mapping
+- Network Security
+- Blue Team Operations
+- Threat Hunting
+- Malware Analysis
+- Security Automation
+
+---
+
+# 🖥️ Homelab Architecture
+
+```text
+                         ┌────────────────────────────┐
+                         │       Home Router          │
+                         └────────────┬───────────────┘
+                                      │
+                        10.10.50.0/24 │
+                                      │
+        ┌─────────────────────────────┼─────────────────────────────┐
+        │                             │                             │
+        │                             │                             │
+┌─────────────────┐         ┌─────────────────┐          ┌──────────────────┐
+│ Kali Linux VM   │         │ Windows 11 VM   │          │ Ubuntu Server    │
+│                 │────────▶│                 │─────────▶│ Wazuh SIEM        │
+│ Attacker        │         │ Victim / Agent  │          │ Monitoring Server │
+│ 10.10.50.20     │         │ 10.10.50.25     │          │ 10.10.60.10      │
+└─────────────────┘         └─────────────────┘          └──────────────────┘
 ```
-┌─────────────────────────────────────────────────┐
-│                HOME NETWORK (192.168.1.0/24)     │
-│                                                  │
-│  ┌─────────────────┐     ┌─────────────────┐    │
-│  │  Kali Linux VM  │────▶│ Windows Laptop  │    │
-│  │  192.168.1.24   │     │  192.168.1.22   │    │
-│  │  (Attacker)     │     │  (Victim/Agent) │    │
-│  └─────────────────┘     └────────┬────────┘    │
-│                                   │ logs         │
-│                          ┌────────▼────────┐    │
-│                          │  Ubuntu 26.04   │    │
-│                          │  192.168.1.23   │    │
-│                          │  Wazuh SIEM     │    │
-│                          │  (Monitor)      │    │
-│                          └─────────────────┘    │
-└─────────────────────────────────────────────────┘
-```
 
 ---
 
-## 🧰 Tools & Technologies
+# 🔧 Technologies Used
 
-| Category | Tool | Purpose |
-|----------|------|---------|
-| SIEM | Wazuh 4.7.5 | Log collection, alerting, dashboards |
-| OS — Server | Ubuntu 26.04 LTS | Wazuh server host |
-| OS — Attacker | Kali Linux 2024 | Attack simulation |
-| OS — Victim | Windows 11 | Monitored endpoint |
-| Virtualization | VMware Workstation | Running all VMs |
-| Attack Tool | Hydra v9.7 | SSH brute force |
-| Wordlist | rockyou.txt | Password dictionary (14M passwords) |
-| Framework | MITRE ATT&CK | Threat intelligence mapping |
+| Category | Technology |
+|----------|------------|
+| SIEM | Wazuh |
+| Virtualization | VMware Workstation |
+| Server OS | Ubuntu 26.04 LTS |
+| Attacker OS | Kali Linux |
+| Endpoint | Windows 11 |
+| Scanning | Nmap |
+| Brute Force | Hydra |
+| Packet Analysis | Wireshark |
+| Framework | MITRE ATT&CK |
+| Version Control | Git & GitHub |
 
 ---
 
-## 📁 Project Structure
+# 📂 Repository Structure
 
-```
-soc-homelab/
-├── README.md                          ← You are here
+```text
+SOC-Homelab/
+│
+├── README.md
+│
 ├── incidents/
-│   └── INC-2026-001_SSH_BruteForce/
-│       ├── incident_report.docx       ← Full incident report
-│       └── screenshots/
-│           ├── dashboard_overview.png
-│           ├── brute_force_alerts.png
-│           └── mitre_attack_t1078.png
-└── configs/
-    └── wazuh_setup_notes.md           ← Setup notes
+│   ├── INC-2026-001_SSH_BruteForce/
+│   ├── INC-2026-002_Network_Reconnaissance/
+│   └── Future Incidents...
+│
+├── screenshots/
+│
+├── diagrams/
+│
+├── configs/
+│
+└── docs/
 ```
 
 ---
 
-## 🔴 Attack Simulation — SSH Brute Force
+# 🔥 Completed Projects
 
-### What I Did
+## ✅ Incident 001 — SSH Brute Force Detection
 
-Launched a dictionary-based brute force attack from Kali Linux against the Windows endpoint using **Hydra** and the **rockyou.txt** wordlist — the same tools and wordlist used in real-world attacks.
+### Objective
 
-**Attack command:**
-```bash
-hydra -l hamdi -P /usr/share/wordlists/rockyou.txt ssh://192.168.1.22 -t 4 -V
-```
+Simulate an SSH brute force attack against a Windows endpoint and validate Wazuh's detection capabilities.
 
-### What Happened
+### Attack Tool
 
-Hydra attempted thousands of SSH login combinations per minute. Every single failed attempt was captured by the Wazuh agent on the Windows machine and forwarded to the Wazuh SIEM in real time.
+- Hydra
 
----
+### Skills Learned
 
-## 📊 SIEM Detection Results
-
-### Dashboard Overview — 419 Total Security Events
-
-<img width="1916" height="955" alt="dashboard_overview" src="https://github.com/user-attachments/assets/719400a0-31f8-451e-9b57-0d5e2c9c7e05" />
-
-
-The Wazuh dashboard shows the complete security event timeline. Notice the **spike in alerts at 11:49** when the Wazuh agent first connected and started sending Windows security logs, and the **flood of authentication failures at 12:06** when the brute force attack began.
+- SSH configuration
+- Wazuh agent deployment
+- Windows Event Logs
+- SIEM alert analysis
+- MITRE ATT&CK mapping
+- Incident documentation
 
 ---
 
-### Brute Force Alerts — Real Time Detection
+## ✅ Incident 002 — Network Reconnaissance Detection
 
-<img width="1913" height="887" alt="brute_force_alerts" src="https://github.com/user-attachments/assets/eceaa72d-2463-4055-83ee-89d3e4926fb7" />
+### Objective
 
+Simulate the reconnaissance phase of an attack by performing host discovery, full TCP port scanning, and vulnerability assessment using Nmap.
 
-Wazuh detected every single password attempt in real time:
+### Attack Tool
 
-- **Rule 60122** — "Logon failure - Unknown user or bad password"
-- **Alert Level 5** — Medium severity
-- **Multiple alerts per second** — consistent with automated tooling
-- **100% of Top 5 alerts** were authentication failures during the attack
-- **PCI DSS 10.2.4 and 10.2.5** compliance violations automatically flagged
+- Nmap
 
----
+### Techniques Used
 
-### MITRE ATT&CK Mapping — T1078 Valid Accounts
+- Host Discovery
+- Port Scanning
+- OS Detection
+- Vulnerability Scanning
 
-<img width="1409" height="909" alt="mitre_attack_t1078" src="https://github.com/user-attachments/assets/cbc09777-4a21-4cb6-9933-5c5e91542062" />
+### Skills Learned
 
-
-Wazuh automatically mapped the brute force attack to **two MITRE ATT&CK techniques**:
-
-| Technique | Name | Tactics |
-|-----------|------|---------|
-| T1078 | Valid Accounts | Defense Evasion, Persistence, Privilege Escalation, Initial Access |
-| T1531 | Account Access Removal | Impact |
-
-**Real threat groups that use T1078:**
-- **menuPass (APT10)** — Chinese state-sponsored hackers
-- **Wizard Spider** — Russian ransomware group (TrickBot)
-- **UNC2452** — Russian group behind SolarWinds attack
-- **Threat Group-3390** — Chinese APT targeting aerospace & government
-
-This means the technique I simulated is used by **nation-state level threat actors** in real attacks.
+- Network enumeration
+- Open port analysis
+- Attack surface assessment
+- MITRE ATT&CK T1046
+- Security reporting
 
 ---
 
-## 📋 Incident Report
+# 📊 Current Skills Demonstrated
 
-**Incident ID:** INC-2026-001  
-**Severity:** Medium (Level 5)  
-**Status:** Detected & Contained
-
-| Field | Value |
-|-------|-------|
-| Date | June 17, 2026 |
-| Attack Type | SSH Brute Force / Credential Attack |
-| Source IP | 192.168.1.24 (Kali Linux) |
-| Target IP | 192.168.1.22 (Windows Endpoint) |
-| Tool Used | Hydra v9.7 + rockyou.txt |
-| Detection Time | < 1 second after first attempt |
-| Total Alerts | 400+ in under 30 seconds |
-
-Full incident report: [SOC_Incident_Report_INC-2026-001.docx](https://github.com/user-attachments/files/29044904/SOC_Incident_Report_INC-2026-001.docx)
-
+- SIEM Deployment
+- Endpoint Monitoring
+- Windows Event Analysis
+- Linux Administration
+- VMware Networking
+- Network Troubleshooting
+- Log Analysis
+- Threat Detection
+- Alert Triage
+- MITRE ATT&CK Mapping
+- Incident Documentation
+- Security Recommendations
+- Technical Reporting
 
 ---
 
-## 🔧 Key Skills Demonstrated
+# 📚 Learning Roadmap
 
-- ✅ **SIEM Deployment** — Installed and configured Wazuh SIEM from scratch on Ubuntu
-- ✅ **Agent Deployment** — Connected Windows endpoint to SIEM via Wazuh agent
-- ✅ **Network Configuration** — Configured VMware bridged networking, firewall rules, SSH
-- ✅ **Attack Simulation** — Executed SSH brute force using Hydra
-- ✅ **Alert Triage** — Analyzed and categorized security alerts in Wazuh dashboard
-- ✅ **Threat Intelligence** — Mapped alerts to MITRE ATT&CK framework
-- ✅ **Incident Documentation** — Wrote professional incident report (INC-2026-001)
-- ✅ **Troubleshooting** — Diagnosed and resolved NAT, firewall, and network connectivity issues
+The homelab will continue expanding with more realistic attack simulations.
 
----
+## Planned Projects
 
-## 🚧 What's Coming Next
-
-- [ ] Add Kali Linux as a monitored agent in Wazuh
-- [ ] Run Nmap scan and detect it in SIEM
-- [ ] Set up Wazuh active response to auto-block attacking IPs
-- [ ] Add vulnerable VM (Metasploitable) as a target
-- [ ] Run Metasploit exploits and detect them
-- [ ] Write custom Wazuh detection rules
-- [ ] Document each attack as a separate incident report
-
----
-
-## 🧠 What I Learned
-
-1. **Wazuh detects attacks in milliseconds** — real-time alerting works exactly as in enterprise environments
-2. **MITRE ATT&CK mapping is automatic** — Wazuh maps alerts to real threat techniques out of the box
-3. **Network troubleshooting is a core SOC skill** — solving NAT, firewall, and routing issues is everyday work
-4. **Documentation matters** — a detected attack without documentation is useless in a real SOC
-5. **rockyou.txt is genuinely dangerous** — password-based authentication should never be used without rate limiting and lockout policies
+- [ ] Detect Nmap scans automatically in Wazuh
+- [ ] Configure Active Response
+- [ ] Add Kali as a monitored endpoint
+- [ ] Deploy Sysmon
+- [ ] Integrate Microsoft Sentinel
+- [ ] Build Sigma detection rules
+- [ ] Create YARA rules
+- [ ] Threat Hunting exercises
+- [ ] PowerShell attack detection
+- [ ] Credential dumping detection
+- [ ] Pass-the-Hash simulation
+- [ ] Mimikatz detection
+- [ ] Metasploit exploitation
+- [ ] Reverse shell detection
+- [ ] Persistence detection
+- [ ] Scheduled task abuse
+- [ ] Windows Defender bypass techniques
+- [ ] Malware analysis
+- [ ] Phishing simulations
+- [ ] DNS tunneling detection
+- [ ] Ransomware behavior analysis
+- [ ] Network segmentation
+- [ ] Wazuh custom rules
+- [ ] Detection engineering projects
 
 ---
 
-## 📬 Connect With Me
+# 🎓 What I'm Learning
 
-- **LinkedIn:** : https://www.linkedin.com/in/hamdichedl/
+This homelab allows me to practice skills commonly expected from a Tier 1 SOC Analyst, including:
 
+- Monitoring security events
+- Investigating alerts
+- Understanding attacker behavior
+- Mapping attacks to MITRE ATT&CK
+- Writing professional incident reports
+- Identifying security weaknesses
+- Recommending defensive controls
+- Building detection logic
+- Improving visibility across endpoints
+
+Every incident follows a complete investigation workflow:
+
+1. Attack Simulation
+2. Detection
+3. Alert Analysis
+4. Threat Intelligence
+5. MITRE Mapping
+6. Incident Documentation
+7. Lessons Learned
+8. Security Recommendations
 
 ---
 
-*This homelab is part of my journey to become a SOC Analyst. Every project here is hands-on, self-built, and documented as I would in a real security operations environment.*
+# 📈 Long-Term Goal
+
+My objective is to build a portfolio that demonstrates practical cybersecurity skills through real-world simulations rather than theoretical exercises.
+
+By documenting each attack from both the attacker and defender perspectives, I aim to deepen my understanding of detection engineering, incident response, and SOC operations while continuously improving my technical abilities.
+
+This repository represents my ongoing learning journey and will continue to grow as I complete new projects and explore more advanced attack techniques and defensive strategies.
+
+---
+
+# 🤝 Connect With Me
+
+**LinkedIn**
+
+https://www.linkedin.com/in/hamdichedl/
+
+---
+
+## ⚠️ Disclaimer
+
+All activities documented in this repository were performed in a **controlled personal homelab** for educational and defensive cybersecurity purposes only.
+
+No production systems, third-party infrastructure, or unauthorized networks were targeted.
